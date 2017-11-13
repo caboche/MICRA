@@ -1,0 +1,21 @@
+# First part: defining some basic things
+# In this example, we just give a name to the assembly
+# and tell MIRA it should assemble a genome de-novo in accurate mode
+# As special parameter, we want to use 4 threads in parallel (where possible)
+
+
+project=unmapped 
+job=denovo,genome,accurate
+parameters = -GE:not=24 -NW:cmrnl=warn
+
+# The second part defines the sequencing data MIRA should load and assemble
+# The data is logically divided into "readgroups", for more information
+# please consult the MIRA manual, chapter "Reference"
+
+readgroup = SomeUnpairedIonTorrentReadsIGotFromTheLab
+technology = iontor
+data = unmapFinal.fastq
+
+
+
+

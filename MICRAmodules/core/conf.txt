@@ -1,0 +1,17 @@
+#command line for phylo step 1 all genome
+phylo_index@snap-0.15/./snap index genome genome_index
+phylo_mapper@snap-0.15/./snap single genome_index reads -o output -t 24 -M -F a -d 16@false
+#command line for reference(s) list gene
+ref_index@
+ref_mapper@SHRiMP-2.2.3/./gmapper reads genome  -N 24 -Q -g -15 -q -15 -e -15 --qv-offset 33 --un unmapped@true
+#command line for DUST
+DUST@./dustmasker -in input
+#Mira
+de_novo@MIRA-4.0.2/./mira manifest.txt
+#blast
+BLAST@blastn -query input -db BLAST_db/patric_cds -num_threads 40 -outfmt 5 -evalue 1e-5
+#command line for plasmid module
+plasmid1_index@snap-0.15/./snap index genome genome_index
+plasmid1_mapper@snap-0.15/./snap single genome_index reads -o output -t 24 -M -F a -d 16@false
+plasmid2_index@
+plasmid2_mapper@SHRiMP-2.2.3/./gmapper reads genome -N 24 -Q -g -15 -q -15 -e -15 --qv-offset 33 --un unmapped@true

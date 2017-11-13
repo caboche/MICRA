@@ -1,0 +1,18 @@
+#command line for phylo step 1 all genome
+phylo_index@snap-0.15/./snap index genome genome_index
+phylo_mapper@snap-0.15/./snap paired genome_index reads1 reads2 -o output -t 24 -M -F a -d 16@false
+#command line for reference(s) list gene
+ref_index@bowtie2-2.2.9/./bowtie2-build genome genome_index
+ref_mapper@bowtie2-2.2.9/./bowtie2 -x genome_index -1 reads1 -2 reads2 --no-mixed -S output -p 24 --un-conc unmapped@true
+#command line for DUST
+DUST@./dustmasker -in input
+#de novo assembler A CHANGER
+#de_novo@python2 SPAdes-3.9.0-Linux/bin/./spades.py -1 unmapFinal.1.fastq -2 unmapFinal.2.fastq -o spadesOut
+de_novo@python2 SPAdes-3.9.0-Linux/bin/./spades.py -1 unmapFinal.1.fastq -2 unmapFinal.2.fastq --trusted-contigs mapping_consensus.fa --cov-cutoff auto -k 21,33,55,77,99,127 --careful -o spadesOut
+#blast
+BLAST@blastn -query input -db BLAST_db/patric_cds -num_threads 40 -outfmt 5 -evalue 1e-5
+#command line for plasmid module
+plasmid1_index@snap-0.15/./snap index genome genome_index
+plasmid1_mapper@snap-0.15/./snap paired genome_index reads1 reads2 -o output -t 24 -M -F a -d 16@false
+plasmid2_index@bowtie2-2.2.9/./bowtie2-build genome genome_index
+plasmid2_mapper@bowtie2-2.2.9/./bowtie2 -x genome_index -1 reads1 -2 reads2 --no-mixed -S output -p 24 --un-conc unmapped@true

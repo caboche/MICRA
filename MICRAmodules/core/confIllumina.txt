@@ -1,0 +1,17 @@
+#command line for phylo step 1 all genome
+phylo_index@snap-0.15/./snap index genome genome_index
+phylo_mapper@snap-0.15/./snap single genome_index reads -o output -t 24 -M -F a -d 16@false
+#command line for reference(s) list gene
+ref_index@bowtie2-2.2.9/./bowtie2-build genome genome_index
+ref_mapper@bowtie2-2.2.9/./bowtie2 -x genome_index -U reads -S output -p 24 --un unmapped@true
+#command line for DUST
+DUST@./dustmasker -in input
+#de novo assmbler
+de_novo@SPAdes-3.9.0-Linux/bin/./spades.py -s unmapFinal.fastq -o spadesOut
+#blast
+BLAST@blastn -query input -db BLAST_db/patric_cds -num_threads 40 -outfmt 5 -evalue 1e-5
+#command line for plasmid module
+plasmid1_index@snap-0.15/./snap index genome genome_index
+plasmid1_mapper@snap-0.15/./snap single genome_index reads -o output -t 24 -M -F a -d 16@false
+plasmid2_index@bowtie2-2.2.9/./bowtie2-build genome genome_index
+plasmid2_mapper@bowtie2-2.2.9/./bowtie2 -x genome_index -U reads -S output -p 24 --un unmapped@true
