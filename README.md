@@ -85,7 +85,8 @@ For questions and comments, please contact us at micra(AT)pasteur-lille.fr.
 
 # Citation
 
-A manuscript describing CuReSim-LoRM is under publication. If you make use of the CuReSim-LoRM, please cite us:
-Caboche et al., CuReSim-LoRM: a tool to simulate metabarcoding long reads (submited). 
+Caboche S, Even G, Loywick A, Audebert C, Hot D. MICRA: an automatic pipeline for fast characterization of microbial genomes from high-throughput sequencing data. Genome Biol. 2017 Dec 19;18(1):233. doi: 10.1186/s13059-017-1367-z. PMID: 29258574; PMCID: PMC5738152.
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5738152/
 
 
